@@ -38,59 +38,17 @@ class ProductController {
     }
 
 
-    public static async getAllCape (req: Request, res: Response){
-        const capes = await Product.find({categorie: 'cape'});
+    public static async getOneList(req: Request, res: Response){
+        const nameList = req.params.namelist;
+        const products = await Product.find({categorie: nameList});
         res.status(200).json({
             isSucess: true,
-            requestMessage: 'Todos os capinhas retornados com sucesso',
+            requestMessage: `Todos os produtos da categoria ${nameList} retornados com sucesso`,
             data: {
-                products: capes
+                products: products
             }
         })
-    }
 
-    public static async getAllMobileFilm (req: Request, res: Response){
-        const mobileFilm = await Product.find({categorie: 'mobileFilm'});
-        res.status(200).json({
-            isSucess: true,
-            requestMessage: 'Todos os películas retornados com sucesso',
-            data: {
-                products: mobileFilm,
-            }
-        })
-    }
-
-    public static async getAllCable (req: Request, res: Response){
-        const cable = await Product.find({categorie: 'cable'});
-        res.status(200).json({
-            isSucess: true,
-            requestMessage: 'Todos os cabos retornados com sucesso',
-            data: {
-                products: cable,
-            }
-        })
-    }
-
-    public static async getAllDisplay (req: Request, res: Response){
-        const display = await Product.find({categorie: 'display'});
-        res.status(200).json({
-            isSucess: true,
-            requestMessage: 'Todos os displays retornados com sucesso',
-            data: {
-                products:  display,
-            }
-        })
-    }
-
-    public static async getAllAccessorie (req: Request, res: Response){
-        const accessorie = await Product.find({categorie: 'accessorie'});
-        res.status(200).json({
-            isSucess: true,
-            requestMessage: 'Todos os acessórios retornados com sucesso',
-            data: {
-                products: accessorie,
-            }
-        })
     }
 }
 
