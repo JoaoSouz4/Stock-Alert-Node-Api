@@ -32,7 +32,8 @@ class ProductController {
             isSucess: true,
             requestMessage: 'Todos os produtos retornados com sucesso',
             data: {
-                products: products
+                products: products,
+                currentAmount: products.length
             }
         })
     }
@@ -45,7 +46,8 @@ class ProductController {
             isSucess: true,
             requestMessage: `Todos os produtos da categoria ${nameList} retornados com sucesso`,
             data: {
-                products: products
+                products: products,
+                currentAmount: products.length
             }
         })
 
