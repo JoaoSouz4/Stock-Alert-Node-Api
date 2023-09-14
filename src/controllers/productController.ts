@@ -52,6 +52,54 @@ class ProductController {
         })
 
     }
+
+    public static async DeleteCategorieProducts(req: Request, res: Response){
+        const categorie =  req.params.categorie;
+
+        try {
+            await Product.deleteMany({categorie: categorie});
+            
+            const currentList = await Product.find({categorie: categorie});
+
+            await res.status(200).json({
+                isSucess: true,
+                requestMessage: `Todos os items da categoria ${categorie} foram excluídos`,
+                requestData: {
+                    currentList: currentList,
+                    currentAmount: currentList.length
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        } 
+    }
+
+    public static async DeleteItem(req: Request, res: Response){
+        const name =  req.params.nameproduct;
+        const categorie = req.params.categorie;
+
+        try{
+            await Product.findOneAndDelete({name: name, categorie: categorie});
+            const currentList = await Product.find({categorie: categorie});
+
+            res.status(200).json({
+                isSucess: true,
+                requestMessage: 'Item deletado',
+                requestData: {
+                    currentList: currentList,
+                    currentAmount: currentList.length
+                }
+            })
+        }catch(error){
+            res.status(400).json({
+                isSucess: false,
+                requestMessage: 'Erro ao deletar item',
+                requestData: {
+                    data: error
+                }
+            })
+        }
+    }
 }
 
 export default ProductController;
