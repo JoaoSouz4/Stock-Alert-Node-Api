@@ -2,6 +2,20 @@ import Product from "../models/ProductModel";
 import { Request, Response } from "express";
 
 class ProductController {
+
+    public static async GetOneProduct(req: Request, res: Response){
+        const id = req.params.id;
+
+        try {
+            const product = await Product.findById({_id: id});
+            res.status(200).json({
+                isSucess: true,
+                requestData: product
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
     public static async Register(req: Request, res: Response){
         const {name, registedBy, status, categorie} = req.body;
         try{
@@ -97,6 +111,31 @@ class ProductController {
                 requestData: {
                     data: error
                 }
+            })
+        }
+    }
+
+    public static async UpdateItem(req: Request, res: Response){
+        const idItem: string = req.params.id;
+        const {name, categorie, status} = req.body;
+        try {
+            const item = await Product.findById({_id: idItem});
+           
+            const ItemTarget = await Product.findOneAndUpdate({_id: idItem}, {name: name, categorie: categorie, status: status});
+            const currentList = await Product.find({categorie: item?.categorie});
+            console.log(currentList)
+            res.status(200).json({
+                isSucess: true,
+                requestMessage: 'item atualizado com sucesso',
+                requestData: ItemTarget,
+                currentList: currentList,
+                currentAmount: currentList.length
+            })
+        } catch (error) {
+            res.status(400).json({
+                isSucess: false,
+                requestMessage: 'erro ao atualizar item',
+                requestData: error,
             })
         }
     }
