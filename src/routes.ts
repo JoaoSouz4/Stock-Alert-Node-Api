@@ -1,11 +1,12 @@
 import { Router } from "express";
 import ProductController from "./controllers/productController";
 import { checkRegister } from "./middlewares/checkRegister";
+import { CheckRegisterUpdate } from "./middlewares/checkRegisterUpdate";
 const routes = Router();
 
 
 routes.post('/post/registerproduct', checkRegister, ProductController.Register);
-routes.post('/update/updateitem/:id', ProductController.UpdateItem);
+routes.post('/update/updateitem/:id', CheckRegisterUpdate, ProductController.UpdateItem);
 
 routes.get('/get/getallproducts', ProductController.getAllProducts)
 routes.get('/get/getonelist/:namelist', ProductController.getOneList);

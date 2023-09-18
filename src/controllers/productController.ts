@@ -118,6 +118,7 @@ class ProductController {
     public static async UpdateItem(req: Request, res: Response){
         const idItem: string = req.params.id;
         const {name, categorie, status} = req.body;
+        console.log('name:', name, ' categorie: ', categorie, ' status: ', status)
         try {
             const item = await Product.findById({_id: idItem});
            

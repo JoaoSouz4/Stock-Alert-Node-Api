@@ -14,9 +14,8 @@ export async function checkRegister(req: Request, res: Response, next: NextFunct
     next();
 }
 
-async function namehasRegisted(name: string, categorie: string){
+export async function namehasRegisted(name: string, categorie: string){
     
     const hasRegister = await Product.findOne({name: name, categorie: categorie});
-    console.log(hasRegister)
     return hasRegister? true : false;
 }
