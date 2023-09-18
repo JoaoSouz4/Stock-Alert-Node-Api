@@ -14,11 +14,12 @@ export async function CheckRegisterUpdate(req: Request, res: Response, next: Nex
             next();
         } else {
             if(isRegisted.name == targetItem?.name){
-                console.log(isRegisted, targetItem)
                 res.status(400).json({
                     isSucess: false,
                     requestMessage: 'Este nome não está disponível'
                 })
+            } else {
+                next();
             }
         }
     }
