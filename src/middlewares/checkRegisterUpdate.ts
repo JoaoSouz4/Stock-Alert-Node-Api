@@ -22,6 +22,8 @@ export async function CheckRegisterUpdate(req: Request, res: Response, next: Nex
                 next();
             }
         }
+    } else {
+        next();
     }
     
 }
