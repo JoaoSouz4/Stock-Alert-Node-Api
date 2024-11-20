@@ -14,6 +14,7 @@ routes.get('/get/getoneproduct/:id', ProductController.GetOneProduct)
 
 routes.delete('/delete/removecategorie/:categorie', ProductController.DeleteCategorieProducts);
 routes.delete('/delete/removeitem/:nameproduct/:categorie', ProductController.DeleteItem);
+routes.get('/get/getpdf', ProductController.genPdf)
 
 
 export default routes
